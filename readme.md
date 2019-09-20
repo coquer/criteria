@@ -1,16 +1,16 @@
-# Criteria
+## Criteria
 
 Use this library to create agnostic query filters. This enables loose coupling between the business code and the underlying datasets.
 
-## Basic usage
+### Basic usage
 
-### Create a basic filter that will filter out any elements where the property a is not equal to 1:
+Create a basic filter that will filter out any elements where the property a is not equal to 1:
 
 ```php
 $criteria = Criteria::where()->a->eq(1);
 ```  
 
-### Create a filter with multiple requirements:
+Create a filter with multiple requirements:
 
 ```php
 $criteria = Criteria::where()->a->eq(1)
@@ -19,7 +19,7 @@ $criteria = Criteria::where()->a->eq(1)
 ;
 ``` 
  
-### This filter will match on any of the criterion:
+This filter will match on any of the criterion:
 
 ```php
 $criteria = Criteria::where()->a->eq(1)
@@ -28,7 +28,7 @@ $criteria = Criteria::where()->a->eq(1)
 ;
 ```  
 
-### Match on any of a list of multiple values. The list can either be provided as multiple arguments or as an array. The following two examples creates identical criterion:
+Match on any of a list of multiple values. The list can either be provided as multiple arguments or as an array. The following two examples creates identical criterion:
 
 ```php
 $criteria = Criteria::where()->a->in(1, 2, 3);
@@ -36,7 +36,7 @@ $criteria = Criteria::where()->a->in(1, 2, 3);
 $criteria = Criteria::where()->a->in([1, 2, 3);
 ```
 
-### Nesting is required to mix and/or criteria:
+Nesting is required to mix and/or criteria:
 
 ```php
 $criteria = Criteria::where(Criteria::where()->a->eq(1)->and->b->eq(3))
@@ -44,10 +44,10 @@ $criteria = Criteria::where(Criteria::where()->a->eq(1)->and->b->eq(3))
 ;
 ``` 
 
-### If one of the elements is a single criterion, the initial criteria can be skipped:
+If one of the elements is a single criterion, the initial criteria can be skipped:
 
 ```php
 $criteria = Criteria::where()->a->eq(1)
     ->or(Criteria::where()->c->lt(5)->or->c->gt(10))
 ;
-``` 
+```  
