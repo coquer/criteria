@@ -11,6 +11,7 @@
     ],
     "require": {
         "mongodb/mongodb": "1.1.2",
+        "ext-mongodb": "*",
         "nesbot/carbon": "^2.24"
     },
     "autoload": {
