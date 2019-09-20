@@ -1,0 +1,13 @@
+preset: psr2
+risky: true
+finder:
+  exclude:
+    - modules
+    - node_modules
+    - storage
+    - vendor
+  name: "*.php"
+  not-name: "*.blade.php"
+
+vue: true
+css: true
