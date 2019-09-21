@@ -15,8 +15,8 @@ class CriteriaMongoTest extends TestCase
         $criteria = Criteria::where()->a->eq('test')
             ->and->b->in('dvorak', 'qwerty')
             ->and(Criteria::where(Criteria::where()->c->gte(10)->and->c->lt(20))
-                ->or->d->gte(Carbon::parse('2019-01-01'))
-                ->or(Criteria::where()->e->gte(Carbon::parse('2019-01-01')))
+                ->or->d->gte(Carbon::parse('2019-01-01', 'UTC'))
+                ->or(Criteria::where()->e->gte(Carbon::parse('2019-01-01', 'UTC')))
             )
         ;
         $json = json_encode($criteria->transform(new Mongo()), JSON_PRETTY_PRINT);
@@ -57,7 +57,7 @@ class CriteriaMongoTest extends TestCase
                     "d": {
                         "$gte": {
                             "$date": {
-                                "$numberLong": "1546297200000"
+                                "$numberLong": "1546300800000"
                             }
                         }
                     }
@@ -66,7 +66,7 @@ class CriteriaMongoTest extends TestCase
                     "e": {
                         "$gte": {
                             "$date": {
-                                "$numberLong": "1546297200000"
+                                "$numberLong": "1546300800000"
                             }
                         }
                     }
