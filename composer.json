@@ -10,9 +10,9 @@
         }
     ],
     "require": {
-        "mongodb/mongodb": "1.1.2",
+        "mongodb/mongodb": "^1.1.2",
         "ext-mongodb": "*",
-        "nesbot/carbon": "^2.24"
+        "nesbot/carbon": ">=1.0.0"
     },
     "autoload": {
         "psr-4": {
