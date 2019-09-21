@@ -1,8 +1,9 @@
 ## Criteria
 
-Use this library to create agnostic query filters. This enables loose coupling between the business code and the underlying datasets.
+Use this library to create agnostic query filters. This enables loose coupling between the business code and 
+the underlying datasets.
 
-### Basic usage
+### Basic criteria creation
 
 Create a basic filter that will filter out any elements where the property a is not equal to 1:
 
@@ -28,7 +29,8 @@ $criteria = Criteria::where()->a->eq(1)
 ;
 ```  
 
-Match on any of a list of multiple values. The list can either be provided as multiple arguments or as an array. The following two examples creates identical criterion:
+Match on any of a list of multiple values. The list can either be provided as multiple arguments or as an 
+array. The following two examples creates identical criterion:
 
 ```php
 $criteria = Criteria::where()->a->in(1, 2, 3);
@@ -50,4 +52,15 @@ If one of the elements is a single criterion, the initial criteria can be skippe
 $criteria = Criteria::where()->a->eq(1)
     ->or(Criteria::where()->c->lt(5)->or->c->gt(10))
 ;
+```  
+
+### Transformation of criteria
+
+Use a transformer to generate output the criteria in a specific format. For example use the Mongo transformer to 
+generate a query filter for MongoDB\Collection::find():
+
+```php
+use Criteria\Transformers\Mongo;
+
+$criteria->transform(new Mongo());
 ```  
