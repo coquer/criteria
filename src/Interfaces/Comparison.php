@@ -27,12 +27,28 @@ interface Comparison extends Transformer
     public function eq($key, $arguments);
 
     /**
+     * $key must not equal the first argument.
+     * @param $key
+     * @param $arguments
+     * @return mixed
+     */
+    public function ne($key, $arguments);
+
+    /**
      * $key must match one of the specified arguments.
      * @param $key
      * @param $arguments
      * @return mixed
      */
     public function in($key, $arguments);
+
+    /**
+     * $key must not match any of the specified arguments.
+     * @param $key
+     * @param $arguments
+     * @return mixed
+     */
+    public function nin($key, $arguments);
 
     /**
      * $key must be greater than the first argument.

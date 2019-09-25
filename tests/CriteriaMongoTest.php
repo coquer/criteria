@@ -17,7 +17,7 @@ class CriteriaMongoTest extends TestCase
             ->and(Criteria::where(Criteria::where()->c->gte(10)->and->c->lt(20))
                 ->or->d->gte(Carbon::parse('2019-01-01', 'UTC'))
                 ->or(Criteria::where()->e->gte(Carbon::parse('2019-01-01', 'UTC')))
-            )
+            )->and(Criteria::where()->f->nin([1, 2, 3])->and->g->ne('invalid'))
         ;
         $json = json_encode($criteria->transform(new Mongo()), JSON_PRETTY_PRINT);
 
@@ -72,6 +72,24 @@ class CriteriaMongoTest extends TestCase
                     }
                 }
             ]
+        },
+        {
+            "$and": [
+                {
+                    "f": {
+                        "$nin": [
+                            1,
+                            2,
+                            3
+                        ]
+                    }
+                },
+                {
+                    "g": {
+                        "$ne": "invalid"
+                    }
+                }
+            ]
         }
     ]
 }
@@ -84,11 +102,13 @@ JSON;
     {
         $methods = [
             'in' => [1, 2, 3],
+            'nin' => [1, 2, 3],
             'eq' => 1,
-            'gt' => 2,
-            'gte' => 3,
-            'lt' => 4,
-            'lte' => 5,
+            'ne' => 2,
+            'gt' => 3,
+            'gte' => 4,
+            'lt' => 5,
+            'lte' => 6,
         ];
 
         foreach ($methods as $method => $value) {

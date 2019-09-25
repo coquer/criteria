@@ -5,52 +5,52 @@ the underlying datasets.
 
 ### Basic criteria creation
 
-Create a basic filter that will filter out any elements where the property a is not equal to 1:
+Create a basic filter that will find any elements where the name property is equal to anonymous:
 
 ```php
-$criteria = Criteria::where()->a->eq(1);
+$criteria = Criteria::where()->name->eq('May B. Wright');
 ```  
 
 Create a filter with multiple requirements:
 
 ```php
-$criteria = Criteria::where()->a->eq(1)
-    ->and->b->gte(10)
-    ->and->b->lt(20)
+$criteria = Criteria::where()->name->eq('Justin Case')
+    ->and->age->gte(20)
+    ->and->age->lt(30)
 ;
 ``` 
  
 This filter will match on any of the criterion:
 
 ```php
-$criteria = Criteria::where()->a->eq(1)
-    ->or->b->lt(10)
-    ->or->b->gt(20)
+$criteria = Criteria::where()->shape->eq('square')
+    ->or->color->eq('red')
+    ->or->size('medium')
 ;
 ```  
 
-Match on any of a list of multiple values. The list can either be provided as multiple arguments or as an 
-array. The following two examples creates identical criterion:
+Match on any or none of a list of multiple values. The list can either be provided as multiple arguments or as an 
+array:
 
 ```php
-$criteria = Criteria::where()->a->in(1, 2, 3);
+$criteria = Criteria::where()->rank->in(1, 2, 3);
 
-$criteria = Criteria::where()->a->in([1, 2, 3);
+$criteria = Criteria::where()->rank->nin([1, 2, 3);
 ```
 
 Nesting is required to mix and/or criteria:
 
 ```php
-$criteria = Criteria::where(Criteria::where()->a->eq(1)->and->b->eq(3))
-    ->or(Criteria::where()->c->lt(5)->or->c->gt(10))
+$criteria = Criteria::where(Criteria::where()->created->gte('2017-01-01')->and->created->lt('2018-01-01'))
+    ->or(Criteria::where()->created->gte('2015-01-01')->and->created->lt('2016-01-01'))
 ;
 ``` 
 
 If one of the elements is a single criterion, the initial criteria can be skipped:
 
 ```php
-$criteria = Criteria::where()->a->eq(1)
-    ->or(Criteria::where()->c->lt(5)->or->c->gt(10))
+$criteria = Criteria::where()->created->gte('2019-01-01')
+    ->or(Criteria::where()->color->ne('white')->and->size->in('small', 'medium'))
 ;
 ```  
 

@@ -39,7 +39,21 @@ class Mongo implements Comparison
         return [$key => ['$in' => $this->transform($arguments)]];
     }
 
+    public function nin($key, $arguments)
+    {
+        if (is_array(current($arguments))) {
+            $arguments = current($arguments);
+        }
+
+        return [$key => ['$nin' => $this->transform($arguments)]];
+    }
+
     public function eq($key, $arguments)
+    {
+        return [$key => ['$' . __FUNCTION__ => current($this->transform($arguments))]];
+    }
+
+    public function ne($key, $arguments)
     {
         return [$key => ['$' . __FUNCTION__ => current($this->transform($arguments))]];
     }
